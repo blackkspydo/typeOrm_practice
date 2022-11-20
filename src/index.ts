@@ -1,8 +1,13 @@
 import { sqliteDataSource } from './utils/dataSource';
 import express from 'express';
+import { clientRouter } from './routes/client.router';
+import bodyParser from 'body-parser';
+
+const jsonParser = bodyParser.json();
 
 const app = express();
-const port = 3000;
+const port = 8080;
+app.use(jsonParser);
 
 sqliteDataSource
   .initialize()
@@ -12,6 +17,8 @@ sqliteDataSource
   .catch((err) => {
     console.log('Error initializing data source', err);
   });
+
+  app.use('/api/clients', clientRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

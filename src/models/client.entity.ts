@@ -11,7 +11,6 @@ import {
 import { Banker } from './bankers.entity';
 import { Person } from './baseModel';
 import { Transaction } from './transaction.entity';
-
 @Entity('clients')
 export class Client extends Person {
   @Column({
@@ -24,7 +23,7 @@ export class Client extends Person {
   })
   isActive: boolean;
 
-  @ManyToMany(()=>Banker)
+  @ManyToMany(() => Banker)
   bankers: Banker[];
 
   @CreateDateColumn()
@@ -59,4 +58,10 @@ export class Client extends Person {
     nullable: true
   })
   currencies: string[];
+
+  constructor(client: Partial<Client>) {
+    super();
+    Object.assign(this, client);
+  }
 }
+
