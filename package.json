@@ -1,0 +1,30 @@
+{
+  "name": "typeorm_practice",
+  "version": "1.0.0",
+  "description": "practice project for typeorm",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blackkspydo/typeOrm_practice.git"
+  },
+  "keywords": [
+    "\\"
+  ],
+  "author": "blackkspydo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blackkspydo/typeOrm_practice/issues"
+  },
+  "homepage": "https://github.com/blackkspydo/typeOrm_practice#readme",
+  "dependencies": {
+    "@types/express": "^4.17.14",
+    "express": "^4.18.2",
+    "pg": "^8.8.0",
+    "ts-node": "^10.9.1",
+    "typeorm": "^0.3.10",
+    "typescript": "^4.9.3"
+  }
+}
