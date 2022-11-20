@@ -6,6 +6,7 @@ export const ENV_VARIABLES = {
     PORT: Number(process.env.PORT) || 5432,
     HOST: process.env.HOST || 'localhost',
     USERNAME: process.env.USERNAME || 'root',
-    PASSWORD: process.env.PASSWORD || 'root'
+    PASSWORD: process.env.PASSWORD || 'root',
+    DATABASE: process.env.DATABASE || 'test'
   }
 };
