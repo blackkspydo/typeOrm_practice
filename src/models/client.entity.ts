@@ -1,27 +1,19 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  OneToMany,
+  ManyToMany
+} from 'typeorm';
+import { Banker } from './bankers.entity';
+import { Person } from './baseModel';
+import { Transaction } from './transaction.entity';
 
-@Entity()
-export class Client {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
-  @Column()
-  firstName: string;
-
-  @Column()
-  lastName: string;
-
-  @Column({
-    unique: true
-  })
-  email: string;
-
-  @Column({
-    unique: true,
-    length: 10
-  })
-  cardNumber: string;
-
+@Entity('clients')
+export class Client extends Person {
   @Column({
     type: 'numeric'
   })
@@ -32,15 +24,18 @@ export class Client {
   })
   isActive: boolean;
 
-  @Column()
+  @ManyToMany(()=>Banker)
+  bankers: Banker[];
+
+  @CreateDateColumn()
   createdAt: Date;
 
-  @Column({
+  @UpdateDateColumn({
     nullable: true
   })
   updatedAt: Date;
 
-  @Column({
+  @DeleteDateColumn({
     nullable: true
   })
   deletedAt: Date;
@@ -55,4 +50,13 @@ export class Client {
     state: string;
     zip: number;
   };
+
+  @OneToMany(() => Transaction, (transaction) => transaction.client)
+  transactions: Transaction[];
+
+  @Column({
+    type: 'simple-array',
+    nullable: true
+  })
+  currencies: string[];
 }
