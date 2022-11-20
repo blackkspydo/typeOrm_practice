@@ -1,6 +1,7 @@
 import { sqliteDataSource } from "./utils/dataSource";
 import express from "express";
 import { clientRouter } from "./routes/client.router";
+import { bankerRouter } from "./routes/banker.router";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 dotenv.config();
@@ -21,6 +22,7 @@ sqliteDataSource
   });
 
 app.use("/api/clients", clientRouter);
+app.use("/api/bankers", bankerRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

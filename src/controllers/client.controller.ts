@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
+import { validate } from "class-validator";
+
 import { sqliteDataSource } from "../utils/dataSource";
 import { Client } from "../models/client.entity";
-import { validate } from "class-validator";
 export class ClientController {
   public async getAllClients(req: Request, res: Response) {
     try {
