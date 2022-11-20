@@ -1,13 +1,13 @@
-import { ClientController } from '../controllers/client.controller';
-import { Router } from 'express';
-import { validate } from '../middlewares/validator';
-import { clientSchema } from '../schemas/client.schema';
+import { ClientController } from "../controllers/client.controller";
+import { Router } from "express";
 
 const router = Router();
 
 const clientController = new ClientController();
 
-router.get('/', clientController.getAllClients);
-router.post('/', validate(clientSchema), clientController.addClient);
+router.get("/", clientController.getAllClients);
+router.get("/:id", clientController.getClient);
+router.post("/", clientController.addClient);
+router.put("/:id", clientController.updateClient);
 
 export { router as clientRouter };

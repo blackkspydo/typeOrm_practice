@@ -7,20 +7,30 @@ import {
   DeleteDateColumn,
   OneToMany,
   ManyToMany
-} from 'typeorm';
-import { Banker } from './bankers.entity';
-import { Person } from './baseModel';
-import { Transaction } from './transaction.entity';
-@Entity('clients')
+} from "typeorm";
+import { IsNumber, IsNotEmpty, IsBoolean, IsOptional, IsIn, IsArray, IsString } from "class-validator";
+import { Banker } from "./bankers.entity";
+import { Person } from "./baseModel";
+import { Transaction } from "./transaction.entity";
+import { CURRENCIES } from "../utils/constants";
+
+@Entity("clients")
 export class Client extends Person {
   @Column({
-    type: 'numeric'
+    type: "numeric",
+    precision: 10,
+    scale: 2,
+    default: 0
   })
+  @IsNotEmpty()
+  @IsNumber()
   balance: number;
 
   @Column({
     default: true
   })
+  @IsBoolean()
+  @IsOptional()
   isActive: boolean;
 
   @ManyToMany(() => Banker)
@@ -29,9 +39,7 @@ export class Client extends Person {
   @CreateDateColumn()
   createdAt: Date;
 
-  @UpdateDateColumn({
-    nullable: true
-  })
+  @UpdateDateColumn()
   updatedAt: Date;
 
   @DeleteDateColumn({
@@ -40,9 +48,10 @@ export class Client extends Person {
   deletedAt: Date;
 
   @Column({
-    type: 'simple-json',
+    type: "simple-json",
     nullable: true
   })
+  @IsOptional()
   additionalInfo: {
     address: string;
     city: string;
@@ -54,8 +63,16 @@ export class Client extends Person {
   transactions: Transaction[];
 
   @Column({
-    type: 'simple-array',
+    type: "simple-array",
     nullable: true
+  })
+  @IsOptional()
+  @IsArray()
+  @IsString({
+    each: true
+  })
+  @IsIn(CURRENCIES, {
+    each: true
   })
   currencies: string[];
 
@@ -64,4 +81,3 @@ export class Client extends Person {
     Object.assign(this, client);
   }
 }
-

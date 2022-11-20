@@ -1,7 +1,9 @@
-import { sqliteDataSource } from './utils/dataSource';
-import express from 'express';
-import { clientRouter } from './routes/client.router';
-import bodyParser from 'body-parser';
+import { sqliteDataSource } from "./utils/dataSource";
+import express from "express";
+import { clientRouter } from "./routes/client.router";
+import bodyParser from "body-parser";
+import dotenv from "dotenv";
+dotenv.config();
 
 const jsonParser = bodyParser.json();
 
@@ -12,13 +14,13 @@ app.use(jsonParser);
 sqliteDataSource
   .initialize()
   .then(() => {
-    console.log('Data source initialized');
+    console.log("Data source initialized");
   })
   .catch((err) => {
-    console.log('Error initializing data source', err);
+    console.log("Error initializing data source", err);
   });
 
-  app.use('/api/clients', clientRouter);
+app.use("/api/clients", clientRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

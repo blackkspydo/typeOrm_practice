@@ -9,3 +9,12 @@ export const clientSchema = Yup.object().shape({
   isActive: Yup.boolean(),
   currencies: Yup.array().of(Yup.string()).required()
 });
+export const clientUpdateSchema = Yup.object().shape({
+  firstName: Yup.string(),
+  lastName: Yup.string(),
+  email: Yup.string().email(),
+  cardNumber: Yup.string().length(10),
+  balance: Yup.number(),
+  isActive: Yup.boolean(),
+  currencies: Yup.array().of(Yup.string())
+});
