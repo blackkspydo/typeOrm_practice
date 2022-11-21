@@ -126,4 +126,17 @@ export class ClientController {
       return res.status(500).send({ message: "Internal server Error" });
     }
   }
+  public async deleteClient(req: Request, res: Response) {
+    const { id } = req.params;
+    const clientRepository = sqliteDataSource.getRepository(Client);
+    const client = await clientRepository.delete({
+      id
+    });
+    if (client.affected) {
+      return res.status(204).send({
+        message: "Client deleted"
+      });
+    }
+    return res.status(404).send({ message: "Client not found" });
+  }
 }

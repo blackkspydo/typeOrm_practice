@@ -47,7 +47,9 @@ export class Transaction {
   })
   createdAt: Date;
 
-  @ManyToOne(() => Client, (client) => client.transactions)
+  @ManyToOne(() => Client, (client) => client.transactions, {
+    onDelete: "CASCADE"
+  })
   @JoinColumn({ name: "clientId" })
   client: Client;
 

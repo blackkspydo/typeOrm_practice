@@ -68,7 +68,6 @@ export class TransactionController {
   public async getTransactions(req: Request, res: Response) {
     try {
       const { clientId } = req.params;
-      console.log(clientId);
       const client = await sqliteDataSource
         .createQueryBuilder()
         .select("client")
@@ -97,6 +96,7 @@ export class TransactionController {
       return res.status(500).send({ message: "Internal server Error" });
     }
   }
+
   public async getTransaction(req: Request, res: Response) {
     try {
       const { transactionId: id } = req.params;
